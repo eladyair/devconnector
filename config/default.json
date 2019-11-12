@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://eladyair:elad3380@devconnector-i6knz.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://eladyair:elad3380@devconnector-i6knz.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtToken": "mysecrettoken"
 }
