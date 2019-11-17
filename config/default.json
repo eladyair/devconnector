@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://eladyair:elad3380@devconnector-i6knz.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtToken": "mysecrettoken"
+    "jwtToken": "mysecrettoken",
+    "githubClientId": "c8ea2ffb30615ebec009",
+    "githubClientSecret": "03ffe375ac37048de348e1d20790fcd68bd2c133"
 }
