@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = props => {
+const Register = ({ alert, setAlert, register }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,55 +20,58 @@ const Register = props => {
     const onSubmit = async e => {
         e.preventDefault();
         if (password !== password2) {
-            if (props.alert) props.setAlert('Passwords do not match', 'danger', 3000);
+            if (alert) {
+                setAlert('Passwords do not match', 'danger', 3000);
+            }
         } else {
-            console.log('Success');
+            register({ name, email, password });
         }
     };
 
     return (
         <Fragment>
-            <h1 className='large text-primary'>Sign Up</h1>
-            <p className='lead'>
-                <i className='fas fa-user'></i> Creat Your Account
+            <h1 className="large text-primary">Sign Up</h1>
+            <p className="lead">
+                <i className="fas fa-user"></i> Creat Your Account
             </p>
-            <form onSubmit={e => onSubmit(e)} className='form'>
-                <div className='form-group'>
-                    <input type='text' placeholder='Name' name='name' value={name} onChange={e => onChange(e)} required />
+            <form onSubmit={e => onSubmit(e)} className="form">
+                <div className="form-group">
+                    <input type="text" placeholder="Name" name="name" value={name} onChange={e => onChange(e)} required />
                 </div>
-                <div className='form-group'>
-                    <input type='email' placeholder='Email Address' name='email' value={email} onChange={e => onChange(e)} required />
-                    <small className='form-text'>This site uses Gravatar, so if you want a profile image, use Gravatar email</small>
+                <div className="form-group">
+                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e)} required />
+                    <small className="form-text">This site uses Gravatar, so if you want a profile image, use Gravatar email</small>
                 </div>
-                <div className='form-group'>
-                    <input type='password' placeholder='password' name='password' value={password} onChange={e => onChange(e)} minLength='6' />
+                <div className="form-group">
+                    <input type="password" placeholder="password" name="password" value={password} onChange={e => onChange(e)} minLength="6" />
                 </div>
-                <div className='form-group'>
+                <div className="form-group">
                     <input
-                        type='password'
-                        placeholder='Confirm Password'
-                        name='password2'
+                        type="password"
+                        placeholder="Confirm Password"
+                        name="password2"
                         value={password2}
                         onChange={e => onChange(e)}
-                        minLength='6'
+                        minLength="6"
                     />
                 </div>
-                <input type='submit' value='Register' className='btn btn-primary' />
+                <input type="submit" value="Register" className="btn btn-primary" />
             </form>
-            <p className='my-1'>
-                Already have an account? <Link to='./login'>Sign In</Link>
+            <p className="my-1">
+                Already have an account? <Link to="./login">Sign In</Link>
             </p>
         </Fragment>
     );
 };
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    alerts: state.alert
+    alert: state.alert
 });
 
 // Connecting this component to redux using the connect function
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
