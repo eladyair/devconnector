@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
 import Landing from './components/layouts/Landing';
@@ -8,25 +8,39 @@ import Alert from './components/layouts/Alert';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
+// Actions
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 
-const App = () => (
-    <Provider store={store}>
-        <Router>
-            <Fragment>
-                <Navbar />
-                <Route exact path='/' component={Landing} />
-                <section className='container'>
-                    <Alert />
-                    <Switch>
-                        <Route exact path='/register' component={Register} />
-                        <Route exact path='/login' component={Login} />
-                    </Switch>
-                </section>
-            </Fragment>
-        </Router>
-    </Provider>
-);
+if (localStorage.token) {
+    setAuthToken(localStorage.token);
+}
+
+const App = () => {
+    console.log('Loaded');
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, []); // [] - causes it to run only once on mount and unmount instead of a infinite loop
+
+    return (
+        <Provider store={store}>
+            <Router>
+                <Fragment>
+                    <Navbar />
+                    <Route exact path="/" component={Landing} />
+                    <section className="container">
+                        <Alert />
+                        <Switch>
+                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/login" component={Login} />
+                        </Switch>
+                    </section>
+                </Fragment>
+            </Router>
+        </Provider>
+    );
+};
 
 export default App;

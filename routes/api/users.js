@@ -70,12 +70,12 @@ router.post(
             };
 
             // Creating the token to be send to the client
-            jwt.sign(payload, config.get('jwtToken'), { expiresIn: 3600 }, (err, jwtToken) => {
+            jwt.sign(payload, config.get('jwtToken'), { expiresIn: 3600 }, (err, token) => {
                 if (err) {
                     throw err;
                 }
                 // sending the token back to the client
-                res.json({ jwtToken });
+                res.json({ token });
             });
         } catch (err) {
             console.log(err.message);
