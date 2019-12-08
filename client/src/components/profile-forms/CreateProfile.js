@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// Actions
+import { createProfile } from '../../actions/profile';
 
-const CreateProfile = props => {
+const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -24,6 +27,11 @@ const CreateProfile = props => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    const onSubmit = e => {
+        e.preventDefault();
+        createProfile(formData, history);
+    };
+
     return (
         <Fragment>
             <h1 className='large text-primary'>Create Your Profile</h1>
@@ -31,7 +39,7 @@ const CreateProfile = props => {
                 <i className='fas fa-user'></i> Let's get some information to get your profile stand out
             </p>
             <small>* = required fields</small>
-            <form action='' className='form'>
+            <form onSubmit={e => onSubmit(e)} className='form'>
                 <div className='form-group'>
                     <select name='status' value={status} onChange={e => onChange(e)}>
                         <option value='0'>* Select Professional Status</option>
@@ -101,7 +109,6 @@ const CreateProfile = props => {
                         </div>
                     </Fragment>
                 )}
-
                 <input type='submit' className='btn btn-primary my-1' />
                 <a href='dashboard.html' className='btn btn-light my-1'>
                     Go Back
@@ -111,7 +118,9 @@ const CreateProfile = props => {
     );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+    createProfile: PropTypes.func.isRequired
+};
 
-const mapStateToProps = state => ({});
-export default connect()(CreateProfile);
+// Using the "withRouter" from react-dom-router allows us to use history in the action file of profile and its mapped to props
+export default connect(null, { createProfile })(withRouter(CreateProfile));
