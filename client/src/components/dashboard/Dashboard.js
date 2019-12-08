@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 // Components
 import Spinner from '../layouts/Spinner';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({ getCurrentProfile, profile: { profile, loading }, auth: { user } }) => {
     // As soon as the dahboard loads we make a call to get the user profile
@@ -24,6 +26,8 @@ const Dashboard = ({ getCurrentProfile, profile: { profile, loading }, auth: { u
             {profile !== null ? (
                 <Fragment>
                     <DashboardActions />
+                    <Experience experience={profile.experience} />
+                    <Education education={profile.education} />
                 </Fragment>
             ) : (
                 <Fragment>
