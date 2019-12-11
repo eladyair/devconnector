@@ -8,11 +8,11 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
-import ProfileRepos from './ProfileRepos';
+import ProfileGithub from './ProfileGithub';
 // Actions
 import { getProfileById } from '../../actions/profile';
 
-const Profile = ({ getProfileById, profile: { profile, loading }, auth, match }) => {
+const Profile = ({ getProfileById, profile: { profile, loading, error }, auth, match }) => {
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
@@ -58,20 +58,8 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth, match })
                                 <h4>No education credentials</h4>
                             )}
                         </div>
-                        <div className="profile-github">
-                            <h2 className="text-primary my-1">
-                                <i className="fab fa-github"></i> Github Repos
-                            </h2>
-                            {/* {profile.repos.length > 0 ? (
-                                <Fragment>
-                                    {profile.repos.map(edu => (
-                                        <ProfileEducation key={edu._id} education={edu} />
-                                    ))}
-                                </Fragment>
-                            ) : (
-                                <h4>No Github repos</h4>
-                            )} */}
-                        </div>
+
+                        {profile.githubusername && error.status === undefined && <ProfileGithub username={profile.githubusername} />}
                     </div>
                 </Fragment>
             )}

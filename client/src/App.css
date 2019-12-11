@@ -433,8 +433,7 @@ img {
     padding-bottom: 1rem;
     border-bottom: dotted 1px #ccc;
 }
-.profile-grid .profile-exp:last-child,
-.profile-grid .profile-edu:last-child {
+.profile-grid:last-child {
     border: none;
 }
 .profile-grid .profile-exp p,

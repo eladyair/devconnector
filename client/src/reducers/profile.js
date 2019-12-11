@@ -36,7 +36,8 @@ export default (state = initialState, action) => {
                 ...state,
                 profile: null,
                 repos: [],
-                loading: false
+                loading: false,
+                error: {}
             };
         case PROFILE_ERROR:
             return {
