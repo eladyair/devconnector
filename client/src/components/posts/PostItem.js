@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -10,10 +10,10 @@ const PostItem = ({ auth, post: { _id, text, name, avatar, user, likes, comments
     return (
         <div className='post bg-white my-1 p-1'>
             <div>
-                <a href='profile.html'>
+                <Link to={`/profile/${user}`}>
                     <img className='round-img' src={avatar} alt='' />
                     <h4>{name}</h4>
-                </a>
+                </Link>
             </div>
             <div>
                 <p className='my-1'>{text}</p>
