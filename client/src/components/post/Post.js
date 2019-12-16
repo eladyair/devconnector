@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // Components
 import PostItem from '../posts/PostItem';
+import CommentForm from '../post/CommnetForm';
 import Spinner from '../layouts/Spinner';
 // Actions
 import { getPost } from '../../actions/post';
@@ -21,6 +22,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
                 Back To Posts
             </Link>
             <PostItem post={post} showActions={false} />
+            <CommentForm postId={post._id} />
         </Fragment>
     );
 };
